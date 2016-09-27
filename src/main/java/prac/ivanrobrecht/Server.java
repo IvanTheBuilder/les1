@@ -1,7 +1,5 @@
 package prac.ivanrobrecht;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -17,14 +15,12 @@ public class Server {
     public static void main(String[] args) {
         try {
             serversocket = new ServerSocket(1366);
-            Socket clientsocket = serversocket.accept();
-            DataInputStream stream = new DataInputStream(clientsocket.getInputStream());
-            DataOutputStream dataOutputStream = new DataOutputStream(clientsocket.getOutputStream());
-
+            Socket clientsocket;
             while(true) {
-                System.out.println(stream.readUTF());
-                dataOutputStream.writeUTF("Hier is uwen file");
+                clientsocket = serversocket.accept();
+                ServerThread serverThread = new ServerThread(clientsocket);
             }
+
 
         } catch (IOException e) {
             e.printStackTrace();
