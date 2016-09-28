@@ -14,10 +14,14 @@ public class Client {
         try {
             Socket socket = new Socket("localhost", 1366);
             //Vraag bestand op
+            byte[] bytes = new byte[16*1024];
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataOutputStream.writeUTF("test.txt");
             FileOutputStream fileOutputStream = new FileOutputStream("testt.txt");
-            fileOutputStream.write(socket.getInputStream().read());
+            int count;
+            while ((count = socket.getInputStream().read(bytes)) > 0) {
+                fileOutputStream.write(bytes, 0, count);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

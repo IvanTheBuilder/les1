@@ -34,11 +34,13 @@ public class ServerThread extends Thread {
                 FileInputStream fileInputStream = new FileInputStream(file);
                 byte[] fileBytes = new byte[(int) file.length()];
                 BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
-                dataOutputStream.write(fileBytes);
-                int count;
-                while ((count = bufferedInputStream.read(fileBytes)) > 0) {
+                int count = 0;
+
+                while ((count = bufferedInputStream.read(fileBytes)) != -1) {
                     dataOutputStream.write(fileBytes, 0, count);
+                    System.out.println("Sending some bytes... "+count);
                 }
+                System.out.println(fileBytes);
                 System.out.println("Completed, closing connection...");
                 dataOutputStream.close();
                 dataInputStream.close();
