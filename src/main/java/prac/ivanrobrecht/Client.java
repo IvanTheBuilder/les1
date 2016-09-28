@@ -12,7 +12,7 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("localhost", 1366);
+            Socket socket = new Socket("192.168.0.2", 1366);
             //Vraag bestand op
             byte[] bytes = new byte[16*1024];
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
