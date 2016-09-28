@@ -23,15 +23,27 @@ public class ServerThread extends Thread {
     }
 
     public void run() {
+        System.out.println("Accepted new client...");
         // Vraag bestandsnaam op
         try {
             String bestandsnaam = dataInputStream.readUTF();
+            System.out.println("Client requested "+bestandsnaam);
             File file = new File(bestandsnaam);
             if(file.exists()) {
+                System.out.println("File was found ("+file.length()+")");
                 FileInputStream fileInputStream = new FileInputStream(file);
                 byte[] fileBytes = new byte[(int) file.length()];
                 BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
                 dataOutputStream.write(fileBytes);
+                int count;
+                while ((count = bufferedInputStream.read(fileBytes)) > 0) {
+                    dataOutputStream.write(fileBytes, 0, count);
+                }
+                System.out.println("Completed, closing connection...");
+                dataOutputStream.close();
+                dataInputStream.close();
+                socket.close();
+                System.out.println("Socket has terminated");
             }
         } catch (IOException e) {
             e.printStackTrace();

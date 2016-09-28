@@ -12,11 +12,11 @@ public class Client {
 
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("ip", 1366);
+            Socket socket = new Socket("localhost", 1366);
             //Vraag bestand op
             DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
             dataOutputStream.writeUTF("test.txt");
-            FileOutputStream fileOutputStream = new FileOutputStream("test.txt");
+            FileOutputStream fileOutputStream = new FileOutputStream("testt.txt");
             fileOutputStream.write(socket.getInputStream().read());
         } catch (IOException e) {
             e.printStackTrace();
