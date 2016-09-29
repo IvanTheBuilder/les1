@@ -4,8 +4,7 @@ import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -38,7 +37,6 @@ public class FileTransfer extends Thread {
             byte[] digest;
             try {
                 MessageDigest md = MessageDigest.getInstance("MD5");
-
                 FileInputStream fileInputStream = null;
                 DigestInputStream dis = new DigestInputStream(new FileInputStream(file), md);
                 digest = md.digest();
@@ -46,6 +44,7 @@ public class FileTransfer extends Thread {
 
 
             byte[] fileBytes = new byte[512];
+                fileInputStream = new FileInputStream(file);
             BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
             int count = 0;
 
