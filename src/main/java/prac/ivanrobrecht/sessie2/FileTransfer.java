@@ -31,7 +31,6 @@ public class FileTransfer extends Thread {
         System.out.println("Checking for filename....");
         File file = new File(filename.toString());
         System.out.println(file.getAbsolutePath());
-        System.out.println("test "+(filename.equals("test.txt")));
         if(file.getAbsoluteFile().exists()) {
             System.out.println("File was found ("+file.length()+") Generating hash...");
             byte[] digest;
@@ -60,6 +59,9 @@ public class FileTransfer extends Thread {
             }catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        }
+        else {
+            System.out.println("file not found");
         }
     }
 
