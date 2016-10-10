@@ -8,9 +8,6 @@ import java.net.DatagramSocket;
  */
 public class UDPServer {
 
-
-
-
     public static void main(String[] args) {
         try {
             DatagramSocket datagramSocket = new DatagramSocket(10001);
@@ -18,7 +15,7 @@ public class UDPServer {
             System.out.println("Starting server...");
             while(true) {
                 DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
-                datagramSocket.receive(receivePacket);
+                datagramSocket.receive(receivePacket);      //wachten tot er een pakket binnenkomt
                 String filename = new String( receivePacket.getData()).substring(0, receivePacket.getLength());
                 System.out.println(filename+" size: "+receivePacket.getLength());
                 new FileTransfer(datagramSocket, receivePacket.getAddress(),filename, receivePacket.getPort()).start();
