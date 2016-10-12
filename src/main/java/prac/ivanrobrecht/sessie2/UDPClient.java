@@ -18,7 +18,7 @@ public class UDPClient {
     {
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         DatagramSocket clientSocket = new DatagramSocket();
-        InetAddress IPAddress = InetAddress.getByName("localhost");
+        InetAddress IPAddress = InetAddress.getByName("192.168.1.2");
 
 
 
@@ -27,7 +27,8 @@ public class UDPClient {
         /**
          * We send over the filename of the requested file.
          */
-        String filename = "foto1.jpg";
+        System.out.println("filename?\n");
+        String filename = inFromUser.readLine();
         byte[] fileNameBytes = filename.getBytes();
         System.out.println("Sending filename: "+filename);
         DatagramPacket sendPacket = new DatagramPacket(fileNameBytes, fileNameBytes.length, IPAddress, 10001);
