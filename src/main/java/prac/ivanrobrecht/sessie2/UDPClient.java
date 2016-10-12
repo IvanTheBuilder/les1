@@ -18,16 +18,15 @@ public class UDPClient {
     {
         BufferedReader inFromUser = new BufferedReader(new InputStreamReader(System.in));
         DatagramSocket clientSocket = new DatagramSocket();
-        InetAddress IPAddress = InetAddress.getByName("192.168.1.2");
 
-
-
+        System.out.println("ip adres server? ");
+        InetAddress IPAddress = InetAddress.getByName(inFromUser.readLine());
 
 
         /**
          * We send over the filename of the requested file.
          */
-        System.out.println("filename?\n");
+        System.out.println("filename?");
         String filename = inFromUser.readLine();
         byte[] fileNameBytes = filename.getBytes();
         System.out.println("Sending filename: "+filename);
